@@ -1,0 +1,1119 @@
+{
+	"variables": [],
+	"info": {
+		"name": "mifos initial setup",
+		"_postman_id": "c8d4aefd-659e-1b2c-c0af-a60da0fc1e9f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01 user setup",
+			"description": "",
+			"item": [
+				{
+					"name": "Initial login fims",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"accessToken\", jsonData.accessToken);",
+									"postman.setEnvironmentVariable(\"user\", \"fims\");",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{host}}/identity/v1/token?grant_type=password&username=fims&password=cEBzJHcwciY=",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Permissions fims",
+					"request": {
+						"url": "http://{{host}}/identity/v1/users/fims/permissions",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get permissions necessary before Change of password"
+					},
+					"response": []
+				},
+				{
+					"name": "Change fims Password",
+					"request": {
+						"url": "http://{{host}}/identity/v1/users/fims/password",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"password\":\"cGFzc3dvcnQ=\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"url": "http://{{host}}/identity/v1/token/_current",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Login fims",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"accessToken\", jsonData.accessToken);",
+									"postman.setEnvironmentVariable(\"user\", \"fims\");",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{host}}/identity/v1/token?grant_type=password&username=fims&password=cGFzc3dvcnQ=",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Headoffice",
+					"request": {
+						"url": "http://{{host}}/api/office/v1/offices",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"NUE\",\"name\":\"Nürnberg\",\"description\":\"Headoffice Nürnberg\",\"address\":{\"street\":\"Cramer-Clett-Str. 21\",\"city\":\"Nürnberg\",\"region\":null,\"postalCode\":\"90489\",\"countryCode\":\"DE\",\"country\":\"Deutschland\"}}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Superuser Role",
+					"request": {
+						"url": "http://{{host}}/identity/v1/roles",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"ALL\",\"permissions\":[{\"permittableEndpointGroupIdentifier\":\"identity__v1__roles\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]},{\"permittableEndpointGroupIdentifier\":\"identity__v1__self\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]},{\"permittableEndpointGroupIdentifier\":\"office__v1__employees\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]},{\"permittableEndpointGroupIdentifier\":\"customer__v1__task\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]},{\"permittableEndpointGroupIdentifier\":\"catalog__v1__catalog\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]},{\"permittableEndpointGroupIdentifier\":\"identity__v1__users\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]},{\"permittableEndpointGroupIdentifier\":\"accounting__v1__journal\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]},{\"permittableEndpointGroupIdentifier\":\"office__v1__offices\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]},{\"permittableEndpointGroupIdentifier\":\"customer__v1__customer\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]},{\"permittableEndpointGroupIdentifier\":\"accounting__v1__ledger\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]},{\"permittableEndpointGroupIdentifier\":\"portfolio__v1__case\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]},{\"permittableEndpointGroupIdentifier\":\"portfolio__v1__products\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]},{\"permittableEndpointGroupIdentifier\":\"office__v1__self\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]},{\"permittableEndpointGroupIdentifier\":\"accounting__v1__account\",\"allowedOperations\":[\"READ\",\"CHANGE\",\"DELETE\"]}]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Branch Office",
+					"request": {
+						"url": "http://{{host}}/api/office/v1/offices/NUE",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"ESC\",\"name\":\"Eschborn\",\"description\":\"Office Eschborn\",\"address\":{\"street\":\"Düsseldorfer Str. 13\",\"city\":\"Eschborn\",\"region\":null,\"postalCode\":\"65760\",\"countryCode\":\"DE\",\"country\":\"Deutschland\"},\"parentIdentifier\":\"NUE\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Branch Office User",
+					"request": {
+						"url": "http://{{host}}/identity/v1/users",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"superuser\",\"password\":\"cGFzc3dvcnQ=\",\"role\":\"ALL\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Branch Office Employee",
+					"request": {
+						"url": "http://{{host}}/api/office/v1/employees",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"superuser\",\"givenName\":\"Super\",\"middleName\":\"\",\"surname\":\"User\",\"contactDetails\":[],\"assignedOffice\":\"ESC\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Logout copy",
+					"request": {
+						"url": "http://{{host}}/identity/v1/token/_current",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Initial login superuser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"accessToken\", jsonData.accessToken);",
+									"postman.setEnvironmentVariable(\"user\", \"superuser\");",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{host}}/identity/v1/token?grant_type=password&username=superuser&password=cGFzc3dvcnQ=",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Permissions for superuser",
+					"request": {
+						"url": "http://{{host}}/identity/v1/users/superuser/permissions",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get permissions necessary before Change of password"
+					},
+					"response": []
+				},
+				{
+					"name": "Change superuser Password",
+					"request": {
+						"url": "http://{{host}}/identity/v1/users/superuser/password",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"password\":\"cGFzc3dvcnQ=\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Logout copy",
+					"request": {
+						"url": "http://{{host}}/identity/v1/token/_current",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Login superuser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"accessToken\", jsonData.accessToken);",
+									"postman.setEnvironmentVariable(\"user\", \"superuser\");",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{host}}/identity/v1/token?grant_type=password&username=superuser&password=cGFzc3dvcnQ=",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "02 account setup",
+			"description": "",
+			"item": [
+				{
+					"name": "Login superuser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"accessToken\", jsonData.accessToken);",
+									"postman.setEnvironmentVariable(\"user\", \"superuser\");",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{host}}/identity/v1/token?grant_type=password&username=superuser&password=cGFzc3dvcnQ=",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Ledger Equity - Kassenbestand",
+					"request": {
+						"url": "http://{{host}}/api/accounting/v1/ledgers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"0001\",\"type\":\"EQUITY\",\"name\":\"Kassenbestand\",\"description\":null,\"subLedgers\":[]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Ledger Liability - KKK",
+					"request": {
+						"url": "http://{{host}}/api/accounting/v1/ledgers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"3301\",\"type\":\"LIABILITY\",\"name\":\"Kundenkontokorrent\",\"description\":null,\"subLedgers\":[]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Ledger Asset - Forderungen",
+					"request": {
+						"url": "http://{{host}}/api/accounting/v1/ledgers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"3310\",\"type\":\"ASSET\",\"name\":\"Forderungen\",\"description\":null,\"subLedgers\":[]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Ledger Revenue - Zinserträge",
+					"request": {
+						"url": "http://{{host}}/api/accounting/v1/ledgers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"5500\",\"type\":\"REVENUE\",\"name\":\"Zinserträge\",\"description\":null,\"subLedgers\":[]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Ledger Liability - Rückstellungen",
+					"request": {
+						"url": "http://{{host}}/api/accounting/v1/ledgers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"9920\",\"type\":\"LIABILITY\",\"name\":\"Rückstellungen\",\"description\":null,\"subLedgers\":[]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Ledger Expenses - UNUSED",
+					"request": {
+						"url": "http://{{host}}/api/accounting/v1/ledgers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"9999\",\"type\":\"EXPENSE\",\"name\":\"Expenses\",\"description\":null,\"subLedgers\":[]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Account-Holder",
+					"request": {
+						"url": "http://{{host}}/api/customer/v1/customers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"ESC-owner\",\"givenName\":\"ESC\",\"surname\":\"owner\",\"middleName\":null,\"type\":\"PERSON\",\"address\":{\"street\":\"x\",\"city\":\"x\",\"postalCode\":null,\"region\":null,\"countryCode\":\"DE\",\"country\":\"Deutschland\"},\"contactDetails\":[],\"dateOfBirth\":{\"day\":1,\"month\":1,\"year\":1980},\"customValues\":[]}\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Account - Kasse",
+					"request": {
+						"url": "http://{{host}}/api/accounting/v1/accounts",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"00011\",\"type\":\"EQUITY\",\"ledger\":\"0001\",\"balance\":10000,\"holders\":[\"ESC-owner\"],\"signatureAuthorities\":[\"ESC-owner\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Account - Forderungen-Darlehen",
+					"request": {
+						"url": "http://{{host}}/api/accounting/v1/accounts",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"33101\",\"type\":\"ASSET\",\"ledger\":\"3310\",\"balance\":0,\"holders\":[\"ESC-owner\"],\"signatureAuthorities\":[\"ESC-owner\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Account - Zinserträge",
+					"request": {
+						"url": "http://{{host}}/api/accounting/v1/accounts",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"55001\",\"type\":\"REVENUE\",\"ledger\":\"5500\",\"balance\":0,\"holders\":[\"ESC-owner\"],\"signatureAuthorities\":[\"ESC-owner\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Account - Zinsabgrenzung",
+					"request": {
+						"url": "http://{{host}}/api/accounting/v1/accounts",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"55002\",\"type\":\"REVENUE\",\"ledger\":\"5500\",\"balance\":0,\"holders\":[\"ESC-owner\"],\"signatureAuthorities\":[\"ESC-owner\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Account - Rückstellung aus Darlehen",
+					"request": {
+						"url": "http://{{host}}/api/accounting/v1/accounts",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"99201\",\"type\":\"LIABILITY\",\"ledger\":\"9920\",\"balance\":0,\"holders\":[\"ESC-owner\"],\"signatureAuthorities\":[\"ESC-owner\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "03 product setup",
+			"description": "",
+			"item": [
+				{
+					"name": "Login superuser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"accessToken\", jsonData.accessToken);",
+									"postman.setEnvironmentVariable(\"user\", \"superuser\");",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{host}}/identity/v1/token?grant_type=password&username=superuser&password=cGFzc3dvcnQ=",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Loan Product",
+					"request": {
+						"url": "http://{{host}}/api/portfolio/v1/products",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"LOAN\",\"name\":\"my first loan\",\"description\":\"description\",\"minorCurrencyUnitDigits\":2,\"currencyCode\":\"EUR\",\"interestBasis\":\"CURRENT_BALANCE\",\"interestRange\":{\"minimum\":\"1.00\",\"maximum\":\"20.00\"},\"termRange\":{\"maximum\":48,\"temporalUnit\":\"MONTHS\"},\"balanceRange\":{\"minimum\":\"1000\",\"maximum\":\"200000\"},\"parameters\":\"{\\\"maximumDispersalAmount\\\":0,\\\"maximumDispersalCount\\\":0,\\\"moratoriums\\\":[]}\",\"patternPackage\":\"io.mifos.individuallending.api.v1\",\"accountAssignments\":[{\"accountIdentifier\":\"00011\",\"designator\":\"loan-funds-source\"},{\"ledgerIdentifier\":\"3310\",\"designator\":\"customer-loan\"},{\"accountIdentifier\":\"55001\",\"designator\":\"processing-fee-income\"},{\"accountIdentifier\":\"55001\",\"designator\":\"disbursement-fee-income\"},{\"accountIdentifier\":\"55001\",\"designator\":\"late-fee-income\"},{\"accountIdentifier\":\"55002\",\"designator\":\"late-fee-accrual\"},{\"accountIdentifier\":\"55001\",\"designator\":\"origination-fee-income\"},{\"accountIdentifier\":\"55001\",\"designator\":\"interest-income\"},{\"accountIdentifier\":\"55002\",\"designator\":\"interest-accrual\"},{\"accountIdentifier\":\"99201\",\"designator\":\"arrears-allowance\"}]}\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Enable Product",
+					"request": {
+						"url": "http://{{host}}/api/portfolio/v1/products/LOAN/enabled",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "true"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "99 Other",
+			"description": "",
+			"item": [
+				{
+					"name": "Create Customer",
+					"request": {
+						"url": "http://{{host}}/api/customer/v1/customers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"identifier\":\"hmueller\",\"givenName\":\"Hans\",\"surname\":\"Müller\",\"middleName\":null,\"type\":\"PERSON\",\"address\":{\"street\":\"x\",\"city\":\"x\",\"postalCode\":null,\"region\":null,\"countryCode\":\"DE\",\"country\":\"Deutschland\"},\"contactDetails\":[],\"dateOfBirth\":{\"day\":1,\"month\":1,\"year\":1980},\"assignedOffice\":\"ESC\",\"customValues\":[]}\n"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
