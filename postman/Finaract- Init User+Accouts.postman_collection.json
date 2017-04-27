@@ -1,8 +1,8 @@
 {
 	"variables": [],
 	"info": {
-		"name": "mifos initial setup",
-		"_postman_id": "c8d4aefd-659e-1b2c-c0af-a60da0fc1e9f",
+		"name": "Finaract: Init User+Accouts",
+		"_postman_id": "7a91a494-2bdf-27ca-8111-91c3387695d8",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -32,7 +32,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/token?grant_type=password&username=fims&password=cEBzJHcwciY=",
+						"url": "http://{{hosturl}}/identity/v1/token?grant_type=password&username=fims&password=cEBzJHcwciY=",
 						"method": "POST",
 						"header": [
 							{
@@ -64,7 +64,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/users/fims/permissions",
+						"url": "http://{{hosturl}}/identity/v1/users/fims/permissions",
 						"method": "GET",
 						"header": [
 							{
@@ -83,7 +83,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Get permissions necessary before Change of password"
 					},
 					"response": []
@@ -103,7 +106,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/users/fims/password",
+						"url": "http://{{hosturl}}/identity/v1/users/fims/password",
 						"method": "PUT",
 						"header": [
 							{
@@ -145,7 +148,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/token/_current",
+						"url": "http://{{hosturl}}/identity/v1/token/_current",
 						"method": "DELETE",
 						"header": [
 							{
@@ -164,7 +167,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -188,7 +194,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/token?grant_type=password&username=fims&password=cGFzc3dvcnQ=",
+						"url": "http://{{hosturl}}/identity/v1/token?grant_type=password&username=fims&password=cGFzc3dvcnQ=",
 						"method": "POST",
 						"header": [
 							{
@@ -197,7 +203,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -217,7 +226,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/office/v1/offices",
+						"url": "http://{{hosturl}}/api/office/v1/offices",
 						"method": "POST",
 						"header": [
 							{
@@ -264,7 +273,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/roles",
+						"url": "http://{{hosturl}}/identity/v1/roles",
 						"method": "POST",
 						"header": [
 							{
@@ -311,7 +320,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/office/v1/offices/NUE",
+						"url": "http://{{hosturl}}/api/office/v1/offices/NUE",
 						"method": "POST",
 						"header": [
 							{
@@ -358,7 +367,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/users",
+						"url": "http://{{hosturl}}/identity/v1/users",
 						"method": "POST",
 						"header": [
 							{
@@ -405,7 +414,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/office/v1/employees",
+						"url": "http://{{hosturl}}/api/office/v1/employees",
 						"method": "POST",
 						"header": [
 							{
@@ -452,7 +461,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/token/_current",
+						"url": "http://{{hosturl}}/identity/v1/token/_current",
 						"method": "DELETE",
 						"header": [
 							{
@@ -471,7 +480,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -495,7 +507,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/token?grant_type=password&username=superuser&password=cGFzc3dvcnQ=",
+						"url": "http://{{hosturl}}/identity/v1/token?grant_type=password&username=superuser&password=cGFzc3dvcnQ=",
 						"method": "POST",
 						"header": [
 							{
@@ -504,7 +516,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -523,7 +538,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/users/superuser/permissions",
+						"url": "http://{{hosturl}}/identity/v1/users/superuser/permissions",
 						"method": "GET",
 						"header": [
 							{
@@ -542,7 +557,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Get permissions necessary before Change of password"
 					},
 					"response": []
@@ -562,7 +580,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/users/superuser/password",
+						"url": "http://{{hosturl}}/identity/v1/users/superuser/password",
 						"method": "PUT",
 						"header": [
 							{
@@ -604,7 +622,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/token/_current",
+						"url": "http://{{hosturl}}/identity/v1/token/_current",
 						"method": "DELETE",
 						"header": [
 							{
@@ -623,7 +641,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -647,7 +668,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/token?grant_type=password&username=superuser&password=cGFzc3dvcnQ=",
+						"url": "http://{{hosturl}}/identity/v1/token?grant_type=password&username=superuser&password=cGFzc3dvcnQ=",
 						"method": "POST",
 						"header": [
 							{
@@ -656,7 +677,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -686,7 +710,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/token?grant_type=password&username=superuser&password=cGFzc3dvcnQ=",
+						"url": "http://{{hosturl}}/identity/v1/token?grant_type=password&username=superuser&password=cGFzc3dvcnQ=",
 						"method": "POST",
 						"header": [
 							{
@@ -695,7 +719,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -715,7 +742,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/accounting/v1/ledgers",
+						"url": "http://{{hosturl}}/api/accounting/v1/ledgers",
 						"method": "POST",
 						"header": [
 							{
@@ -762,7 +789,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/accounting/v1/ledgers",
+						"url": "http://{{hosturl}}/api/accounting/v1/ledgers",
 						"method": "POST",
 						"header": [
 							{
@@ -809,7 +836,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/accounting/v1/ledgers",
+						"url": "http://{{hosturl}}/api/accounting/v1/ledgers",
 						"method": "POST",
 						"header": [
 							{
@@ -856,7 +883,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/accounting/v1/ledgers",
+						"url": "http://{{hosturl}}/api/accounting/v1/ledgers",
 						"method": "POST",
 						"header": [
 							{
@@ -903,7 +930,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/accounting/v1/ledgers",
+						"url": "http://{{hosturl}}/api/accounting/v1/ledgers",
 						"method": "POST",
 						"header": [
 							{
@@ -950,7 +977,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/accounting/v1/ledgers",
+						"url": "http://{{hosturl}}/api/accounting/v1/ledgers",
 						"method": "POST",
 						"header": [
 							{
@@ -997,7 +1024,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/customer/v1/customers",
+						"url": "http://{{hosturl}}/api/customer/v1/customers",
 						"method": "POST",
 						"header": [
 							{
@@ -1044,7 +1071,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/accounting/v1/accounts",
+						"url": "http://{{hosturl}}/api/accounting/v1/accounts",
 						"method": "POST",
 						"header": [
 							{
@@ -1070,7 +1097,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"identifier\":\"00011\",\"type\":\"EQUITY\",\"ledger\":\"0001\",\"balance\":10000,\"holders\":[\"ESC-owner\"],\"signatureAuthorities\":[\"ESC-owner\"]}"
+							"raw": "{\n\t\"name\": \"Kasse\",\n\t\"identifier\":\"00011\",\n\t\"type\":\"EQUITY\",\n\t\"ledger\":\"0001\",\n\t\"balance\":10000,\n\t\"holders\":[\"ESC-owner\"],\n\t\"signatureAuthorities\":[\"ESC-owner\"]\n}"
 						},
 						"description": ""
 					},
@@ -1091,7 +1118,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/accounting/v1/accounts",
+						"url": "http://{{hosturl}}/api/accounting/v1/accounts",
 						"method": "POST",
 						"header": [
 							{
@@ -1117,7 +1144,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"identifier\":\"33101\",\"type\":\"ASSET\",\"ledger\":\"3310\",\"balance\":0,\"holders\":[\"ESC-owner\"],\"signatureAuthorities\":[\"ESC-owner\"]}"
+							"raw": "{\n\t\"name\":\"Forderungen-Darlehen\",\n\t\"identifier\":\"33101\",\n\t\"type\":\"ASSET\",\n\t\"ledger\":\"3310\",\n\t\"balance\":0,\n\t\"holders\":[\"ESC-owner\"],\n\t\"signatureAuthorities\":[\"ESC-owner\"]\n}"
 						},
 						"description": ""
 					},
@@ -1138,7 +1165,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/accounting/v1/accounts",
+						"url": "http://{{hosturl}}/api/accounting/v1/accounts",
 						"method": "POST",
 						"header": [
 							{
@@ -1164,7 +1191,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"identifier\":\"55001\",\"type\":\"REVENUE\",\"ledger\":\"5500\",\"balance\":0,\"holders\":[\"ESC-owner\"],\"signatureAuthorities\":[\"ESC-owner\"]}"
+							"raw": "{\n\t\"name\":\"Zinserträge\",\n\t\"identifier\":\"55001\",\n\t\"type\":\"REVENUE\",\n\t\"ledger\":\"5500\",\n\t\"balance\":0,\n\t\"holders\":[\"ESC-owner\"],\n\t\"signatureAuthorities\":[\"ESC-owner\"]\n}"
 						},
 						"description": ""
 					},
@@ -1185,7 +1212,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/accounting/v1/accounts",
+						"url": "http://{{hosturl}}/api/accounting/v1/accounts",
 						"method": "POST",
 						"header": [
 							{
@@ -1211,7 +1238,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"identifier\":\"55002\",\"type\":\"REVENUE\",\"ledger\":\"5500\",\"balance\":0,\"holders\":[\"ESC-owner\"],\"signatureAuthorities\":[\"ESC-owner\"]}"
+							"raw": "{\n\t\"name\":\"Zinsabgrenzung\",\n\t\"identifier\":\"55002\",\n\t\"type\":\"REVENUE\",\n\t\"ledger\":\"5500\",\n\t\"balance\":0,\n\t\"holders\":[\"ESC-owner\"],\n\t\"signatureAuthorities\":[\"ESC-owner\"]\n\t\n}"
 						},
 						"description": ""
 					},
@@ -1232,7 +1259,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/accounting/v1/accounts",
+						"url": "http://{{hosturl}}/api/accounting/v1/accounts",
 						"method": "POST",
 						"header": [
 							{
@@ -1258,7 +1285,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"identifier\":\"99201\",\"type\":\"LIABILITY\",\"ledger\":\"9920\",\"balance\":0,\"holders\":[\"ESC-owner\"],\"signatureAuthorities\":[\"ESC-owner\"]}"
+							"raw": "{\n\t\"name\":\"Rückstellung aus Darlehen\",\n\t\"identifier\":\"99201\",\n\t\"type\":\"LIABILITY\",\n\t\"ledger\":\"9920\",\n\t\"balance\":0,\n\t\"holders\":[\"ESC-owner\"],\n\t\"signatureAuthorities\":[\"ESC-owner\"]\n}"
 						},
 						"description": ""
 					},
@@ -1289,7 +1316,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/identity/v1/token?grant_type=password&username=superuser&password=cGFzc3dvcnQ=",
+						"url": "http://{{hosturl}}/identity/v1/token?grant_type=password&username=superuser&password=cGFzc3dvcnQ=",
 						"method": "POST",
 						"header": [
 							{
@@ -1298,7 +1325,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -1318,7 +1348,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/portfolio/v1/products",
+						"url": "http://{{hosturl}}/api/portfolio/v1/products",
 						"method": "POST",
 						"header": [
 							{
@@ -1365,8 +1395,55 @@
 						}
 					],
 					"request": {
-						"url": "http://{{host}}/api/portfolio/v1/products/LOAN/enabled",
+						"url": "http://{{hosturl}}/api/portfolio/v1/products/LOAN/enabled",
 						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "true"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Read Account 55001",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{hosturl}}/api/accounting/v1/accounts/55001",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
@@ -1445,6 +1522,53 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\"identifier\":\"hmueller\",\"givenName\":\"Hans\",\"surname\":\"Müller\",\"middleName\":null,\"type\":\"PERSON\",\"address\":{\"street\":\"x\",\"city\":\"x\",\"postalCode\":null,\"region\":null,\"countryCode\":\"DE\",\"country\":\"Deutschland\"},\"contactDetails\":[],\"dateOfBirth\":{\"day\":1,\"month\":1,\"year\":1980},\"assignedOffice\":\"ESC\",\"customValues\":[]}\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Customer Loan",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 202\"] = responseCode.code === 202;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{host}}/api/portfolio/v1/products/LOAN/cases/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"description": ""
+							},
+							{
+								"key": "X-Tenant-Identifier",
+								"value": "{{tenantIdentifier}}",
+								"description": ""
+							},
+							{
+								"key": "User",
+								"value": "{{user}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"currentState\":\"CREATED\",\n\"identifier\":\"firstLoan\",\n\"productIdentifier\":\"LOAN\",\n\"parameters\": {\n\t\"customerIdentifier\":\"hmueller\",\n\t\"balanceRange\": { \"minimum\":0,\"maximum\":5000},\n\t\"initialBalance\":5000,\n\t\"paymentCycle\": {\n\t\t\"alignmentDay\":0,\n\t\t\"alignmentMonth\":null,\n\t\t\"alignmentWeek\":0,\n\t\t\"period\":1,\n\t\t\"temporalUnit\":\"MONTHS\"\n\t},\n\t\"termRange\": {\n\t\t\"temporalUnit\":\"MONTHS\",\n\t\t\"maximum\":24\n\t}\n},\n\"accountAssignments\":[{\n\t\"accountIdentifier\":\"placeholder\",\n\t\"designator\":\"customer-loan\"\n}]\n}"
 						},
 						"description": ""
 					},
